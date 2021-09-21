@@ -14,6 +14,8 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { MoviesModule } from './movies/movies.module';
 
 
 @NgModule({
@@ -37,8 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
     ToastModule,
     DialogModule,
     ButtonModule,
+    MoviesModule,
   ],
-  providers: [],
+  providers: [BsModalRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

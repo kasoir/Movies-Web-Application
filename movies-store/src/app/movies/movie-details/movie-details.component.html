@@ -1,0 +1,115 @@
+<!-- TODO ALI TO REVIEW -->
+<form *ngIf="done; else loading">
+    <div class="modal-header">
+        <div class="container-fluid">
+            <div class="row">
+                <h4 class="modal-title pull-left">Movie {{data.name}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body overflow-hidden">
+        <div class="row fields">
+            <div class="col-md-8">
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Movie Name
+                                </div>
+                            </div>
+                            <input type="search" autocomplete="off" name="name" placeholder="name" id="name"
+                                [(ngModel)]="data.name" class="form-control col-9">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Category
+                                </div>
+                            </div>
+                            <input class="form-control col-9" placeholder="Category" name="category" disabled
+                                [(ngModel)]="data.category" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Year
+                                </div>
+                            </div>
+                            <input class="form-control" name="year" [(ngModel)]="data.year" mask="0000">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+					<div class="form-group">
+						<div class="input-group input-group-sm row">
+							<div class="input-group-prepend col-4">
+								<div class="input-group-text">
+									Director
+								</div>
+							</div>
+							<input class="form-control" name="director"
+								[(ngModel)]="data.director">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-11">
+					<div class="form-group">
+						<div class="input-group input-group-sm row">
+							<div class="input-group-prepend col-4">
+								<div class="input-group-text">
+									Description
+								</div>
+							</div>
+							<input class="form-control col-9" placeholder="Description" name="description"
+								[(ngModel)]="data.description">
+						</div>
+					</div>
+				</div>
+            </div>
+            <div class="col-sm-4">
+				<div class="col-sm-12">
+					<img [src]="data.coverImage" alt="Cover Image">
+				</div>
+			</div>
+        </div>
+        <!-- <div>
+			<div *ngIf="!validDue" class="alert alert-danger">
+				Please Enter Valid Invoice Due Date
+			</div>
+			<div *ngIf="!validDate" class="alert alert-danger">
+				Please Enter Valid Invoice Date
+			</div>
+		</div> -->
+        <!-- <div class="container-fluid">
+			<div class="row fields">
+				<div class="col-sm-12">
+					<label>Items:</label>
+					<button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="invoiceItemAdd()"
+						[disabled]="invoiceReadyDisable" *ngIf="sale.type !== 'QuoteBased'"> <i class="fa fa-plus"
+							aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+		</div> -->
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="bsModalRef.hide()" class="btn btn-sm btn-light ml-auto">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-primary m_l_10 button-color">Download</button>
+    </div>
+</form>
+<ng-template #loading>
+    <div class="text-center m-5">
+        <div class="spinner-border	" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>

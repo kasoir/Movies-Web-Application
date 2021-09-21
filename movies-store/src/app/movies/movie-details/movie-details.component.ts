@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from 'models/movie.model';
+import { NgForm } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-movie-details',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  constructor() { }
+  public data: any;
+  public done = false;
+  constructor(
+    public bsModalRef: BsModalRef,
+  ) { }
 
   ngOnInit(): void {
+    if( this.data ){
+      this.done = true;
+    }
   }
 
 }

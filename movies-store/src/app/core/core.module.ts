@@ -10,6 +10,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'primeng/api';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { SharedModule } from 'primeng/api';
 		TabsModule.forRoot(),
 		MenubarModule,
 		MenuModule,
-		SharedModule,
+    SharedModule,
+    CarouselModule,
+    ButtonModule,
+    ToastModule,
   ],
   exports: [
     HomePageComponent
