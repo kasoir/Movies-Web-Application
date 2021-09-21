@@ -12,6 +12,8 @@ export class MovieDetailsComponent implements OnInit {
 
   public data: any;
   public done = false;
+  canRate = true;
+  currentRate = 0;
   constructor(
     public bsModalRef: BsModalRef,
   ) { }
@@ -20,6 +22,11 @@ export class MovieDetailsComponent implements OnInit {
     if( this.data ){
       this.done = true;
     }
+  }
+
+  submitRating(){
+    console.log('rating now is', this.data.rate);
+    this.canRate = false;
   }
 
 }

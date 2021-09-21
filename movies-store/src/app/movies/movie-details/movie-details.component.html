@@ -18,8 +18,8 @@
                                     Movie Name
                                 </div>
                             </div>
-                            <input type="search" autocomplete="off" name="name" placeholder="name" id="name"
-                                [(ngModel)]="data.name" class="form-control col-9">
+                            <span class="form-control col-9 border-0" placeholder="Name"
+                                name="name">{{data.name}}</span>
                         </div>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                                     Category
                                 </div>
                             </div>
-                            <input class="form-control col-9" placeholder="Category" name="category" disabled
-                                [(ngModel)]="data.category" type="text">
+                            <span class="form-control col-9 border-0" placeholder="Category"
+                                name="category">{{data.category}}</span>
                         </div>
                     </div>
                 </div>
@@ -44,42 +44,64 @@
                                     Year
                                 </div>
                             </div>
-                            <input class="form-control" name="year" [(ngModel)]="data.year" mask="0000">
+                            <span class="form-control col-9 border-0" placeholder="Year"
+                                name="year">{{data.year}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-11">
-					<div class="form-group">
-						<div class="input-group input-group-sm row">
-							<div class="input-group-prepend col-4">
-								<div class="input-group-text">
-									Director
-								</div>
-							</div>
-							<input class="form-control" name="director"
-								[(ngModel)]="data.director">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-11">
-					<div class="form-group">
-						<div class="input-group input-group-sm row">
-							<div class="input-group-prepend col-4">
-								<div class="input-group-text">
-									Description
-								</div>
-							</div>
-							<input class="form-control col-9" placeholder="Description" name="description"
-								[(ngModel)]="data.description">
-						</div>
-					</div>
-				</div>
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Director
+                                </div>
+                            </div>
+                            <span class="form-control col-9 border-0" placeholder="Director"
+                                name="director">{{data.director}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Price
+                                </div>
+                            </div>
+                            <span class="form-control col-9 border-0" placeholder="Price"
+                                name="price">{{data.price}}$</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm row">
+                            <div class="input-group-prepend col-4">
+                                <div class="input-group-text">
+                                    Description
+                                </div>
+                            </div>
+                            <textarea class="form-control col-9 border-0" placeholder="Description" name="description"
+                                [(ngModel)]="data.description" readonly>
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-4">
-				<div class="col-sm-12">
-					<img [src]="data.coverImage" alt="Cover Image">
-				</div>
-			</div>
+                <div class="col-sm-12">
+                    <img [src]="data.coverImage" alt="Cover Image">
+                </div>
+                <div class="col-sm-12">
+                    <ngb-rating [max]="5" [(rate)]="data.rate" [starTemplate]="t" [readonly]="!canRate">
+                    </ngb-rating>
+                    <!-- <button pButton (click)="submitRating()"></button> -->
+                    <button class="btn btn-sm btn-primary button-position" pButton pRipple type="button"
+                        (click)="submitRating()" [disabled]="!canRate">Rate</button>
+                </div>
+            </div>
         </div>
         <!-- <div>
 			<div *ngIf="!validDue" class="alert alert-danger">
@@ -103,7 +125,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" (click)="bsModalRef.hide()" class="btn btn-sm btn-light ml-auto">Cancel</button>
-        <button type="submit" class="btn btn-sm btn-primary m_l_10 button-color">Download</button>
+        <button type="submit" class="btn btn-sm btn-primary m_l_10">Download</button>
     </div>
 </form>
 <ng-template #loading>
@@ -112,4 +134,9 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+</ng-template>
+<ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&starf;</span>&starf;
+    </span>
 </ng-template>
