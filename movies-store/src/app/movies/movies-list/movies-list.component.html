@@ -9,16 +9,22 @@
             styleClass="p-datatable-gridlines p-datatable-striped" *ngIf="movies; else loading" [rowHover]="true">
             <ng-template class="row" pTemplate="header">
                 <tr class="col-12 row pl-0 pr-0 ml-0 mr-0">
-                    <th class="col-2 pt-0 pb-0 text-center" pSortableColumn="id">
-                        ID<p-sortIcon field="id"></p-sortIcon>
+                    <th class="col-1 pt-0 pb-0 text-center" pSortableColumn="id">
+                        Movie<p-sortIcon field="id"></p-sortIcon>
                     </th>
-                    <th class="col-3 pt-0 pb-0 text-center" pSortableColumn="name" p-columnFilter="name">
+                    <th class="col-2 pt-0 pb-0 text-center" pSortableColumn="name" p-columnFilter="name">
                         Name
                         <p-columnFilter type="text" field="name" display="menu" [matchMode]="'contains'">
                         </p-columnFilter>
                         <p-sortIcon field="name"></p-sortIcon>
                     </th>
-                    <th class="col-3 pt-0 pb-0 text-center" pSortableColumn="director" p-columnFilter="director">
+                    <th class="col-2 pt-0 pb-0 text-center" pSortableColumn="category" p-columnFilter="category">
+                        Category
+                        <p-columnFilter type="text" field="category" display="menu" [matchMode]="'contains'">
+                        </p-columnFilter>
+                        <p-sortIcon field="category"></p-sortIcon>
+                    </th>
+                    <th class="col-2 pt-0 pb-0 text-center" pSortableColumn="director" p-columnFilter="director">
                         Director
                         <p-columnFilter type="text" field="director" display="menu" [matchMode]="'contains'">
                         </p-columnFilter>
@@ -30,18 +36,25 @@
                         </p-columnFilter>
                         <p-sortIcon field="year"></p-sortIcon>
                     </th>
-                    <th class="col-2 pt-0 pb-0 text-center">Details</th>
+                    <th class="col-2 pt-0 pb-0 text-center" pSortableColumn="rate" p-columnFilter="rate">
+                        Rate
+                        <p-columnFilter type="text" field="rate" display="menu" [matchMode]="'contains'">
+                        </p-columnFilter>
+                        <p-sortIcon field="rate"></p-sortIcon>
+                    </th>
+                    <th class="col-1 pt-0 pb-0 text-center">Details</th>
                 </tr>
             </ng-template>
-            <ng-template class="row" pTemplate="body" let-movie>
+            <ng-template class="row" pTemplate="body" let-movie let-i="rowIndex">
                 <tr class="row col-12 pl-0 pr-0 ml-0 mr-0">
-                    <td class="col-2 pt-0 pb-0">{{movie.id}}</td>
-                    <td class="col-3 pt-0 pb-0">{{movie.name}}</td>
-                    <td class="col-3 pt-0 pb-0">{{movie.director}}</td>
-                    <td class="col-2 pt-0 pb-0">{{movie.year}}</td>
-                    <td class="col-2 pt-0 pb-0 text-center">
-                        <a><i class="fa fa-info-circle fa-fw" aria-hidden="true">
-                            </i></a>
+                    <td class="col-1 pt-0 pb-0 text-center">{{i + 1}}</td>
+                    <td class="col-2 pt-0 pb-0">{{movie.name}}</td>
+                    <td class="col-2 pt-0 pb-0">{{movie.category}}</td>
+                    <td class="col-2 pt-0 pb-0">{{movie.director}}</td>
+                    <td class="col-2 pt-0 pb-0 text-center">{{movie.year}}</td>
+                    <td class="col-2 pt-0 pb-0 text-center">{{movie.rate}}</td>
+                    <td class="col-1 pt-0 pb-0 text-center">
+                        <a (click) = "movieDetalis(movie)"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             </ng-template>
