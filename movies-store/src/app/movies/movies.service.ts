@@ -12,16 +12,20 @@ export class MoviesService {
   private MOVIE_API = `${BASE_API_URL}/movie`;
   constructor(private http: HttpClient) { }
 
-  // public getBy = async (key?: string, value?: string) => {
-  //   const url = `${ this.MOVIE_API }${ ( !!key && !!value ) ? '/' + key + '/' + value : '' }`;
-  //   const result = await this.http.get<any>( url ).toPromise();
-  //   return result.data;
-  // }
-
   getBy = async ( key?: string, value?: string ): Promise<Movie[]> => {
 		const url = `${ this.MOVIE_API }${ ( !!key && !!value ) ? '/' + key + '/' + value : '' }`;
 		const result = await this.http.get<any>( url ).toPromise();
 		return <Movie[]>result.data;
 
+  }
+  public updateMovie = async ( movie: Movie ) => {
+		try {
+			const url = `${ this.MOVIE_API }/updateMovie`;
+      const result = await this.http.put<any>( url, movie ).toPromise();
+      return <Movie[]>result.data;
+		} catch ( err ) {
+      console.error( err );
+      throw err;
+		}
 	}
 }

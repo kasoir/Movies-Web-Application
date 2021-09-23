@@ -31,10 +31,10 @@ export class NavBarComponent implements OnInit {
         style: { 'margin-left': 'auto', float: 'right', color: 'white' },
         icon: 'pi pi-user nav-user',
         items: [{
-          label: 'Profile',
-          routerLink: '/profile',
+          label: 'Sign In',
+          routerLink: '/signIn',
           visible: true,
-          icon: 'pi pi-user-edit',
+          icon: 'pi pi-power-on',
         }, {
           label: 'Sign Out',
           icon: 'pi pi-power-off',

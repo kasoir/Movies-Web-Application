@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -28,7 +30,11 @@ import { RippleModule } from 'primeng/ripple';
     ReactiveFormsModule,
     NgbModule,
     ButtonModule,
-    RippleModule
-  ]
+    RippleModule,
+    ToastModule,
+  ],
+	providers: [
+		MessageService,
+	],
 })
 export class MoviesModule { }
