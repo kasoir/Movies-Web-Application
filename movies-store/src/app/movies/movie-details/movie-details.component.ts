@@ -32,7 +32,7 @@ export class MovieDetailsComponent implements OnInit {
     this.canRate = false;
     const result = await this.movieService.updateMovie(this.data);
     if (result) {
-      this.messageService.add({ summary: 'Success', detail: 'Rate added successfully...' });
+      this.messageService.add({ summary: 'Success',sticky:false,life:2000,  detail: 'Rate added successfully...' });
     }
   }
 

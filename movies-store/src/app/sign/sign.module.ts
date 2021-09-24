@@ -4,8 +4,9 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SocialLoginModule } from 'angularx-social-login/sociallogin.module';
-import { SharedModule } from 'primeng/api';
+import { MessageService, SharedModule } from 'primeng/api';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ToastModule } from 'primeng/toast';
 
 const routes: Routes = [
 	{ path: '', component: SignInComponent },
@@ -18,7 +19,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
 		RouterModule.forChild( routes ),
-		SharedModule
+    SharedModule,
+    ToastModule,
+  ],
+  providers: [
+    MessageService,
   ],
 	exports: [ RouterModule ]
 })

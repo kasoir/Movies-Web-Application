@@ -2,6 +2,7 @@ import { animate, animateChild, group, query, style, transition, trigger } from 
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Movie } from 'models/movie.model';
+import { AuthService } from 'src/app/auth.service';
 import { MoviesService } from 'src/app/movies/movies.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class HomePageComponent implements OnInit {
 
 	constructor(
 		private movieService: MoviesService,
+		private authService: AuthService,
 	) {
 		this.responsiveOptions = [
 			{
@@ -50,6 +52,7 @@ export class HomePageComponent implements OnInit {
 	}
 
 	async ngOnInit() {
+		await this.authService.verifyUserToken()
 		this.movies = await this.movieService.getBy();
 	}
 	getAnimationState(outlet: RouterOutlet) {

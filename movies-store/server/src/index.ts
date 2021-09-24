@@ -6,6 +6,8 @@ import { apiRoutes } from './api/routes';
 import { apiPort } from '../../settings/setting';
 import * as createError from 'http-errors';
 import { HttpError } from 'http-errors';
+import { apiRoutesNA } from './api/routes-na';
+import { decodeToken } from './lib.decodeJWT';
 
 export const app = express();
 
@@ -14,6 +16,10 @@ app.use( cors );
 // 100 mb limit on body instead of default 100kb
 app.use( express.json( { limit: 100 * 1024 * 1024 } ) );
 
+app.use( apiRoutesNA )
+
+// After this line routes are expected to be authenticated
+app.use( decodeToken )
 app.use( apiRoutes );
 
 app.use( () => {
