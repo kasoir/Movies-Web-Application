@@ -7,6 +7,11 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -23,6 +28,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TableModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
-  ]
+    NgbModule,
+    ButtonModule,
+    RippleModule,
+    ToastModule,
+  ],
+	providers: [
+		MessageService,
+	],
 })
 export class MoviesModule { }

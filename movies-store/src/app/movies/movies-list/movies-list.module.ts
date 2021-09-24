@@ -7,6 +7,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 import { RouterModule, Routes } from '@angular/router';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const routes: Routes = [
   {
@@ -28,9 +30,11 @@ const routes: Routes = [
     TableModule,
     ModalModule.forRoot(),
     RouterModule.forChild( routes ),
+    ToastModule,
   ],	
   providers: [
-		BsModalRef,
+    BsModalRef,
+    MessageService,
 	],
 })
 export class MoviesListModule { }

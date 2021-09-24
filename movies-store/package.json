@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "angular-google-charts": "^2.2.2",
     "angularx-social-login": "^4.0.1",
     "bitly": "^7.1.2",

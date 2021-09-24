@@ -17,3 +17,7 @@ export const settings = {
 	jwtTokenLifeTime: '100',
 	VerificationEmailPeriod: 3,
 };
+
+export const jwtTokenConfig = {
+	storagePathUI: 'currentUserData',
+};
