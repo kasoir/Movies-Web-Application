@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
       },
       {
         label: 'Administration',
-        visible: (this.authService.user.isAdmin),
+        visible: (this.authService.user.isAdmin)?true: false,
       },
       {
         label: this.authService.user.name,
