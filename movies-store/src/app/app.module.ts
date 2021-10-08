@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { MoviesModule } from './movies/movies.module';
 import { SignModule } from './sign/sign.module';
+import { AdministrationModule } from './administration/administration.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { SignModule } from './sign/sign.module';
     ButtonModule,
     MoviesModule,
     SignModule,
+    AdministrationModule,
   ],
   providers: [BsModalRef],
   bootstrap: [AppComponent]

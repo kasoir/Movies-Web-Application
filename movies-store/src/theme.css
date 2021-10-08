@@ -3950,6 +3950,9 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
   color: #fafafa;
   border: #4d777c;
   border-radius: 0.188rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 .p-menubar .p-menuitem-link {
   padding: 0.75rem 1rem;
@@ -5081,4 +5084,8 @@ p-menubarsub{
 .p-dialog .p-dialog-header {
   width:100%;
   
+}
+
+.card{
+  margin-top: 2%;
 }

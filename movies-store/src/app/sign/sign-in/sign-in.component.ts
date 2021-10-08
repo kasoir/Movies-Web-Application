@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { getDefaultUser, User } from 'models/user.model';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/auth.service';
@@ -18,6 +19,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class SignInComponent implements OnInit {
 			this.isClicked = true;
 			const isSuccessUser = await this.authService.signInUser( this.user.email, this.user.password );
 			if ( isSuccessUser ) {
-				console.log( isSuccessUser );
+        console.log( isSuccessUser );
+        this.redirectOnSuccess();
 			}
 			this.isClicked = false;
 		} catch ( err ) {
@@ -56,6 +59,12 @@ export class SignInComponent implements OnInit {
 
 			// }
 		}
-	}
+  }
+  private redirectOnSuccess = async () => {
+      this.router.navigateByUrl( '/' );
+      setTimeout(()=>{
+        window.location.reload();
+      },1000);
+		}
 
 }

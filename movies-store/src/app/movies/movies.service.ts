@@ -18,6 +18,12 @@ export class MoviesService {
 		return <Movie[]>result.data;
 
   }
+  getRecentlyMovies = async ( date: string ): Promise<Movie[]> => {
+		const url = `${ this.MOVIE_API }/${date }`;
+		const result = await this.http.get<any>( url ).toPromise();
+		return <Movie[]>result.data;
+
+  }
   public updateMovie = async ( movie: Movie ) => {
 		try {
 			const url = `${ this.MOVIE_API }/updateMovie`;

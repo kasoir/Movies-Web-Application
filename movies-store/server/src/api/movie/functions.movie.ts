@@ -5,6 +5,7 @@ import { getDefaultMovie, Movie } from '../../../../models/movie.model';
 import * as pg from '../../lib.pool';
 import { apiResponder } from '../../utils/apiResponder';
 import { generateDeleteQuery, generateInsertQuery, generateUpdateQuery } from '../../lib.sqlUtils';
+import { getnow } from '../../utils/getnow';
 
 export const getByMovies: RequestHandler[] = [
 	param('key').optional().isString(),
@@ -13,6 +14,15 @@ export const getByMovies: RequestHandler[] = [
 	apiResponder(async (req: Request, res: Response, next: NextFunction) => {
 		let result: Movie[] = [];
 		result = await getBy(req.params.key, req.params.value);
+		return result || [];
+	}),
+];
+export const getRecentlyMovies: RequestHandler[] = [
+	param('date').isString(),
+	apiValidator,
+	apiResponder(async (req: Request, res: Response, next: NextFunction) => {
+		let result: Movie[] = [];
+		result = await getRecently(req.params.date);
 		return result || [];
 	}),
 ];
@@ -59,6 +69,14 @@ const getBy = async (key?: string, value?: string): Promise<Movie[]> => {
 		queryValues.push(value);
 	}
 	query += ' ;';
+	movies = (await pg.db.query<Movie>(query, queryValues)).rows;
+	return movies;
+}
+const getRecently = async (date: string): Promise<Movie[]> => {
+	let movies: Movie[];
+	const currentDate = getnow()
+	let query = `SELECT * FROM public."movie" Where "uploadDate"<$1 And "uploadDate">$2`;
+	const queryValues: any[] = [currentDate,date];
 	movies = (await pg.db.query<Movie>(query, queryValues)).rows;
 	return movies;
 }

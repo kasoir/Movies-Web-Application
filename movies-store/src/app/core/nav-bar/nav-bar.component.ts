@@ -5,30 +5,34 @@ import { AuthService } from 'src/app/auth.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
 
   public items: MenuItem[] = [];
+  showBar = false;
+  showCase = this.authService?.user ? true : false;
   constructor(
     private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+    console.log(this.showCase);
     this.items = [
       {
         label: 'Home',
         routerLink: '/',
-				visible: true,
+        visible: true,
       },
       {
         label: 'Movies',
         routerLink: '/movies',
-				visible: true,
+        visible: true,
       },
       {
         label: 'Administration',
-        visible: (this.authService.user.isAdmin)?true: false,
+        routerLink: '/administration',
+        visible: (this.authService.user.isAdmin) ? true : false,
       },
       {
         label: this.authService.user.name,
@@ -36,11 +40,12 @@ export class NavBarComponent implements OnInit {
         icon: 'pi pi-user nav-user',
         items: [{
           label: 'Sign In',
-          routerLink: '/signIn',
           visible: true,
+          routerLink: '/signIn',
           icon: 'pi pi-power-on',
         }, {
           label: 'Sign Out',
+          visible: (this.authService.user.uid == '') ? true : false,
           command: () => this.signout(),
           icon: 'pi pi-power-off',
         }],
@@ -48,25 +53,9 @@ export class NavBarComponent implements OnInit {
     ]
   }
   public signout = async () => {
-		await this.authService.signOutUser();
-		localStorage.clear();
-		window.location.reload();
-	}
+    await this.authService.signOutUser();
+    localStorage.clear();
+    window.location.reload();
+  }
 
 }
-/**
- * {
-        label: 'Profile',
-        style: { 'margin-left': 'auto', float: 'right', color: 'white' },
-        icon: 'pi pi-user nav-user',
-        items: [{
-          label: 'Profile',
-          routerLink: '/profile',
-          visible: true,
-          icon: 'pi pi-user-edit',
-        }, {
-          label: 'Sign Out',
-          icon: 'pi pi-power-off',
-        }],
-      }
- */

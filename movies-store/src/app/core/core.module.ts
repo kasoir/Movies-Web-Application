@@ -7,20 +7,29 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'primeng/api';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+
+const routes: Routes = [
+	{
+		path: '', component: WelcomePageComponent,
+  }
+];
+
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    HomePageComponent
+    HomePageComponent,
+    WelcomePageComponent
   ],
   imports: [
-		RouterModule,
 		FormsModule,
 		NgxMaskModule.forRoot(),
 		BsDropdownModule.forRoot(),
@@ -32,7 +41,11 @@ import {ToastModule} from 'primeng/toast';
     CarouselModule,
     ButtonModule,
     ToastModule,
-  ],
+		RouterModule.forChild( routes ),
+  ],  
+  providers: [
+    BsModalRef,
+	],
   exports: [
     HomePageComponent
   ]
