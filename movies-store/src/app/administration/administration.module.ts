@@ -8,6 +8,14 @@ import { ActorManagementComponent } from './actor-management/actor-management.co
 import { DirectorManagementComponent } from './director-management/director-management.component';
 import { CategoryManagementComponent } from './category-management/category-management.component';
 import { ReportComponent } from './report/report.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { MessageService } from 'primeng/api';
+import { ActorModule } from '../actor/actor.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 const routes: Routes = [
 	{ path: '', component: AdministrationComponent },
@@ -31,7 +39,18 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-		RouterModule.forChild( routes ),
-  ]
+    RouterModule.forChild( routes ),
+    InputTextModule,
+    SkeletonModule,
+    TableModule,
+    ToastModule,
+    ActorModule,
+    NgxMaskModule.forRoot(),
+
+  ],
+  providers: [
+    BsModalRef,
+    MessageService,
+	],
 })
 export class AdministrationModule { }

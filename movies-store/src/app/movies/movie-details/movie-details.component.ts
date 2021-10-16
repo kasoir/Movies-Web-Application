@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 export class MovieDetailsComponent implements OnInit {
 
   public data: any;
+  public isAdmin: boolean =false;
   public done = false;
   canRate = true;
   currentRate = 0;
@@ -33,6 +34,14 @@ export class MovieDetailsComponent implements OnInit {
     const result = await this.movieService.updateMovie(this.data);
     if (result) {
       this.messageService.add({ summary: 'Success',sticky:false,life:2000,  detail: 'Rate added successfully...' });
+      this.bsModalRef.hide();
+    }
+  }
+  update = async () => {
+    const result = await this.movieService.updateMovie(this.data);
+    if (result) {
+      this.messageService.add({ summary: 'Success',sticky:false,life:2000,  detail: 'Updated successfully...' });
+      this.bsModalRef.hide();
     }
   }
 

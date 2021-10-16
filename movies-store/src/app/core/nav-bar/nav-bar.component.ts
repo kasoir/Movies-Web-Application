@@ -26,8 +26,17 @@ export class NavBarComponent implements OnInit {
       },
       {
         label: 'Movies',
-        routerLink: '/movies',
+        style: { 'margin-left': 'auto', float: 'right', color: 'white' },
         visible: true,
+        items: [{
+          label: 'Movies',
+          visible: true,
+          routerLink: '/movies',
+        }, {
+          label: 'Actors',
+          visible: true,
+          routerLink: '/actors',
+        }],
       },
       {
         label: 'Administration',
