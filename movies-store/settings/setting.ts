@@ -5,6 +5,7 @@ export const MAX_API_CALL_RETRIES = 1;
 export const VerificationEmailPeriod = 3;
 export const MESSAGE = 'Welcome to local development';
 
+
 export const settings = {
 	postgres: {
 		host: 'localhost',

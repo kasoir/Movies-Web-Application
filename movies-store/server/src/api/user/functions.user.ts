@@ -39,7 +39,7 @@ export const postUser: RequestHandler[] = [
 ];
 
 const getBy = async (key?: string, value?: string): Promise<User[]> => {
-    let movies: User[];
+    let users: User[];
 
     if ((!key && value) || (key && !value)) throw new Error('Invalid arguments');
 
@@ -50,8 +50,8 @@ const getBy = async (key?: string, value?: string): Promise<User[]> => {
         queryValues.push(value);
     }
     query += ' ;';
-    movies = (await pg.db.query<User>(query, queryValues)).rows;
-    return movies;
+    users = (await pg.db.query<User>(query, queryValues)).rows;
+    return users;
 }
 
 const createUser = async (user: User) => {

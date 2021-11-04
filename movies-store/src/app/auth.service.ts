@@ -20,23 +20,23 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  public signInUser = async (email: string, pass: string): Promise<Jwt> => {
-    if (!email || !pass) return this.nullJwt;
-    try {
-      // do check email and pass in backend
-      const jwtData = (await this.http.post<any>(this.AUTH_API, { email, password: pass }).toPromise()).data;
-      const decodedToken = <Jwt>jwt_decode(jwtData.token || '');
-      decodedToken.token = jwtData.token || '';
-      localStorage.setItem(jwtTokenConfig.storagePathUI, JSON.stringify(decodedToken));
-      this.currentUserData.next(decodedToken);
-      this.isActive.next(true);
-      this.user = decodedToken;
-      return decodedToken;
-    } catch (error) {
-      this.signOutUser();
-      throw error;
-    }
-  }
+  public signInUser = async ( email: string, pass: string ): Promise<Jwt> => {
+		if ( !email || !pass ) return this.nullJwt;
+		try {
+			// do check email and pass in backend
+			const jwtData = await this.http.post<any>( this.AUTH_API, { email, password: pass } ).toPromise();
+			const decodedToken = <Jwt> jwt_decode( jwtData.token || '' );
+			decodedToken.token = jwtData.token || '';
+			localStorage.setItem( jwtTokenConfig.storagePathUI, JSON.stringify( decodedToken ) );
+			this.currentUserData.next( decodedToken );
+			this.isActive.next( true );
+			this.user = decodedToken;
+			return decodedToken;
+		} catch ( error ) {
+			this.signOutUser();
+			throw error;
+		}
+	}
 
   public signInAndSendEmailVerification = async ( email: string, password: string ) => {
 		if ( !email || !password ) return false;

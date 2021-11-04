@@ -56,7 +56,6 @@ export class SignUpComponent implements OnInit {
     try {
       const result = await this.userService.createUser(user);
     } catch (error) {
-      console.log(error.error.error);
       this.messageService.add({ summary: 'Error', sticky: false, life: 2000, detail: error.error.error || 'Sign Up Faild..' });
     }
     finally {

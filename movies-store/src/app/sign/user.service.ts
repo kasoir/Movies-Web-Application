@@ -16,4 +16,11 @@ export class UserService {
   public createUser = async (user: User) => {
     return this.http.post<User>(`${this.USER_API}`, user).toPromise();
   }
+
+  getUsers = async ( key?: string, value?: string ): Promise<User[]> => {
+		const url = `${ this.USER_API }${ ( !!key && !!value ) ? '/' + key + '/' + value : '' }`;
+		const result = await this.http.get<any>( url ).toPromise();
+		return <User[]>result.data;
+  }
+  
 }

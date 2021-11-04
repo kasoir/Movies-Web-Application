@@ -25,35 +25,13 @@ import { MoviesService } from 'src/app/movies/movies.service';
 })
 export class HomePageComponent implements OnInit {
 
-	public movies: Movie[] = [];
-	public responsiveOptions: any;
 
 	constructor(
-		private movieService: MoviesService,
 		private authService: AuthService,
-	) {
-		this.responsiveOptions = [
-			{
-				breakpoint: '1024px',
-				numVisible: 3,
-				numScroll: 3
-			},
-			{
-				breakpoint: '768px',
-				numVisible: 2,
-				numScroll: 2
-			},
-			{
-				breakpoint: '560px',
-				numVisible: 1,
-				numScroll: 1
-			}
-		];
-	}
+	) {}
 
 	async ngOnInit() {
 		await this.authService.verifyUserToken()
-		this.movies = await this.movieService.getBy();
 	}
 	getAnimationState(outlet: RouterOutlet) {
 		return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animateState;

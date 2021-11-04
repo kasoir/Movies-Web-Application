@@ -18,8 +18,8 @@
                                     Movie Name
                                 </div>
                             </div>
-                            <span class="form-control col-9 border-0" placeholder="Name"
-                                name="name">{{data.name}}</span>
+                            <input class="form-control col-9 border-0" placeholder="Name" name="name"
+                                [(ngModel)]="data.name" [readonly]="!isAdmin">
                         </div>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                                     Category
                                 </div>
                             </div>
-                            <span class="form-control col-9 border-0" placeholder="Category"
-                                name="category">{{data.category}}</span>
+                            <input class="form-control col-9 border-0" placeholder="Category" name="category"
+                                [(ngModel)]="data.category" [readonly]="!isAdmin">
                         </div>
                     </div>
                 </div>
@@ -44,8 +44,8 @@
                                     Year
                                 </div>
                             </div>
-                            <span class="form-control col-9 border-0" placeholder="Year"
-                                name="year">{{data.year}}</span>
+                            <input class="form-control col-9 border-0" placeholder="Year" name="year"
+                                [(ngModel)]="data.year" [readonly]="!isAdmin">
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                                     Director
                                 </div>
                             </div>
-                            <span class="form-control col-9 border-0" placeholder="Director"
-                                name="director">{{data.director}}</span>
+                            <input class="form-control col-9 border-0" placeholder="Director" name="director"
+                                [(ngModel)]="data.director" [readonly]="!isAdmin">
                         </div>
                     </div>
                 </div>
@@ -70,8 +70,8 @@
                                     Price
                                 </div>
                             </div>
-                            <span class="form-control col-9 border-0" placeholder="Price"
-                                name="price">{{data.price}}$</span>
+                            <input class="form-control col-9 border-0" placeholder="Price" name="price"
+                                [(ngModel)]="data.price" [readonly]="!isAdmin">
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <textarea class="form-control col-9 border-0" placeholder="Description" name="description"
-                                [(ngModel)]="data.description" readonly>
+                                [(ngModel)]="data.description" [readonly]="!isAdmin">
                             </textarea>
                         </div>
                     </div>
@@ -95,37 +95,19 @@
                     <img [src]="data.coverImage" alt="Cover Image">
                 </div>
                 <div class="col-sm-12">
-                    <ngb-rating [max]="5" [(rate)]="data.rate" [starTemplate]="t" [readonly]="!canRate">
+                    <ngb-rating [max]="5" [(rate)]="data.rate" [starTemplate]="t" [readonly]="!isAdmin && !canRate">
                     </ngb-rating>
                     <!-- <button pButton (click)="submitRating()"></button> -->
                     <button class="btn btn-sm btn-primary button-position" pButton pRipple type="button"
-                        (click)="submitRating()" [disabled]="!canRate">Rate</button>
+                        (click)="submitRating()" [disabled]="!isAdmin && !canRate">Rate</button>
                 </div>
             </div>
         </div>
-        <!-- <div>
-			<div *ngIf="!validDue" class="alert alert-danger">
-				Please Enter Valid Invoice Due Date
-			</div>
-			<div *ngIf="!validDate" class="alert alert-danger">
-				Please Enter Valid Invoice Date
-			</div>
-		</div> -->
-        <!-- <div class="container-fluid">
-			<div class="row fields">
-				<div class="col-sm-12">
-					<label>Items:</label>
-					<button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="invoiceItemAdd()"
-						[disabled]="invoiceReadyDisable" *ngIf="sale.type !== 'QuoteBased'"> <i class="fa fa-plus"
-							aria-hidden="true"></i>
-					</button>
-				</div>
-			</div>
-		</div> -->
     </div>
     <div class="modal-footer">
         <button type="button" (click)="bsModalRef.hide()" class="btn btn-sm btn-light ml-auto">Cancel</button>
-        <button type="submit" class="btn btn-sm btn-primary m_l_10">Download</button>
+        <button type="submit" class="btn btn-sm btn-primary m_l_10" *ngIf="!isAdmin">Download</button>
+        <button (click) = "update()" class="btn btn-sm btn-primary m_l_10" *ngIf="isAdmin">Update</button>
     </div>
 </form>
 <ng-template #loading>

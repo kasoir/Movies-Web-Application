@@ -31,8 +31,8 @@ export const jwtAuthPost: RequestHandler[] = [
 				throw new createHttpError.Unauthorized( 'User is Rejected Please Contact System Administrator.' );
 			}
 			const jwt: Jwt = {
-                uid: user.id,
-                name: user.name,
+				uid: user.id,
+				name: user.name,
 				email: user.email,
 				isAdmin: user.isAdmin || false,
 				isVerified: user.isVerified || false,

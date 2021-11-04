@@ -4,6 +4,7 @@ import { settings } from '../../settings/setting';
 const secret = settings.botJwtSecret;
 const tokenLifeSapn = settings.jwtTokenLifeTime;
 
+
 export const generateAuthToken = ( payload: any ) => {
 	return jwt.sign( payload, secret, {
 		expiresIn: `${ tokenLifeSapn }d`,
@@ -19,14 +20,4 @@ export const verifyAuthToken = ( idToken: string ) => {
 		return null;
 	}
 }
-
-
-export const getBotToken = () => {
-	return 'Bot ' + jwt.sign( { message: "I am a bot" }, secret, {
-		expiresIn: '1h',
-		algorithm: 'HS256',
-	} );
-}
-
-
 

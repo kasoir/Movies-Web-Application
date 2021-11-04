@@ -5,6 +5,13 @@ import { getDefaultMovie, Movie } from '../../../../models/movie.model';
 import * as pg from '../../lib.pool';
 import { apiResponder } from '../../utils/apiResponder';
 import { generateDeleteQuery, generateInsertQuery, generateUpdateQuery } from '../../lib.sqlUtils';
+import { getnow, getnowDate } from '../../utils/getnow';
+import path = require('path');
+import { getDefaultSales, Sales } from '../../../../models/sales.model';
+import { UploadedFile } from 'express-fileupload';
+import * as fs from 'fs';
+import { StatusCodes } from 'http-status-codes';
+import { ApiResponse } from '../../../../models/ApiResponse';
 
 export const getByMovies: RequestHandler[] = [
 	param('key').optional().isString(),
@@ -15,6 +22,35 @@ export const getByMovies: RequestHandler[] = [
 		result = await getBy(req.params.key, req.params.value);
 		return result || [];
 	}),
+];
+export const getRecentlyMovies: RequestHandler[] = [
+	param('date').isString(),
+	apiValidator,
+	apiResponder(async (req: Request, res: Response, next: NextFunction) => {
+		let result: Movie[] = [];
+		result = await getRecently(req.params.date);
+		return result || [];
+	}),
+];
+export const getMovie: RequestHandler[] = [
+	param('id').isString(),
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const movie: Movie[] = await getBy('id', req.params.id);
+			let filepath = path.join(__dirname, '../../../movies');
+			filepath += `\\${movie[0].name}.mp4`;
+			const sale: Sales = {
+				name: movie[0].name,
+				date: getnowDate(),
+				price: movie[0].price,
+			}
+			const query = generateInsertQuery('public."sales"', getDefaultSales(), sale, true, true);
+			await pg.db.query<Movie>(query.text, query.values);
+			res.sendFile(filepath);
+		} catch (err) {
+			console.error(err);
+		}
+	},
 ];
 export const putMovie: RequestHandler[] = [
 	body('id').exists().bail().isString(),
@@ -46,7 +82,28 @@ export const postMovie: RequestHandler[] = [
 		return result || {};
 	}),
 ];
+export const PostMovieUpload: RequestHandler[] = [
+	apiResponder(
+		async (req: Request, res: Response, next: NextFunction) => {
+			console.log(req.files)
+			if ( !req.files ) {
+				res.status( StatusCodes.BAD_REQUEST ).json( { code: StatusCodes.BAD_REQUEST, data: {}, message: '', error: 'no file uploaded' } as ApiResponse<{}> );
+			}
+			console.log(req.body)
+			const uploadedFiles: string[] = [];
+			for (const fieldName in req.files) {
+				const movie = req.files[fieldName] as UploadedFile;
+				console.log(movie);
+				if (!fs.existsSync(`../../../ movies /`)) fs.mkdirSync('../../../movies/');
+				const docPath = `../../../movies/${movie.name}`;
+				console.log(docPath);
+				await movie.mv(docPath);
+				uploadedFiles.push(fieldName);
+			}
 
+			return uploadedFiles;
+		}),
+]
 const getBy = async (key?: string, value?: string): Promise<Movie[]> => {
 	let movies: Movie[];
 
@@ -59,6 +116,14 @@ const getBy = async (key?: string, value?: string): Promise<Movie[]> => {
 		queryValues.push(value);
 	}
 	query += ' ;';
+	movies = (await pg.db.query<Movie>(query, queryValues)).rows;
+	return movies;
+}
+const getRecently = async (date: string): Promise<Movie[]> => {
+	let movies: Movie[];
+	const currentDate = getnow()
+	let query = `SELECT * FROM public."movie" Where "uploadDate"<$1 And "uploadDate">$2`;
+	const queryValues: any[] = [currentDate, date];
 	movies = (await pg.db.query<Movie>(query, queryValues)).rows;
 	return movies;
 }

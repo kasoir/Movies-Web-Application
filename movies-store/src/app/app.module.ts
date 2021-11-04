@@ -17,11 +17,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { MoviesModule } from './movies/movies.module';
 import { SignModule } from './sign/sign.module';
+import { AdministrationModule } from './administration/administration.module';
+import { DirectorModule } from './director/director.module';
+import { ReportComponent } from './administration/report/report.component';
+import { MovieUploadComponent } from './administration/movie-upload/movie-upload.component';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ReportComponent,
+    MovieUploadComponent,
   ],
   imports: [
     HttpClientModule,
@@ -42,6 +50,10 @@ import { SignModule } from './sign/sign.module';
     ButtonModule,
     MoviesModule,
     SignModule,
+    AdministrationModule,
+    DirectorModule,
+    TableModule,
+    DropdownModule,
   ],
   providers: [BsModalRef],
   bootstrap: [AppComponent]
