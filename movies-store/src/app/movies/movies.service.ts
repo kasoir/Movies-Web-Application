@@ -73,15 +73,20 @@ export class MoviesService {
 
   public upload = async (movies: MovFile[]): Promise<string[]> => {
     try {
-      const formData = new FormData();
-
-      movies.forEach(movie => {
-        formData.append( movie.name, movie.file );
+      let formData: FormData = new FormData();
+      movies.forEach(async movie => {
+        formData.set('movie', movie.file);
+        const url = `${BASE_API_URL}/movieUpload/upload`;
+        const result = await this.http.post<string[]>(url, formData, {
+          headers: new HttpHeaders()
+            .set('Authorization',
+              JSON.parse((localStorage.getItem('currentUserData') || '{"token":""}')).token || '').set(
+                'Content-Type', 'multipart/form-data'
+              )
+        }).toPromise();
+        return result;
       });
-      const url = `${BASE_API_URL}/movieUpload/upload`;
-      console.log(url);
-      const result = await this.http.post<string[]>(url, formData).toPromise();
-      return result;
+      return [''];
     } catch (error) {
       console.error(error);
       throw error;
