@@ -3,6 +3,7 @@ import { Movie } from 'models/movie.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MovieDetailsComponent } from 'src/app/movies/movie-details/movie-details.component';
 import { MoviesService } from 'src/app/movies/movies.service';
+import { MovieUploadComponent } from '../movie-upload/movie-upload.component';
 
 @Component({
   selector: 'app-movie-management',
@@ -31,7 +32,7 @@ export class MovieManagementComponent implements OnInit {
   }
 
   uploadMovie() {
-
+    this.modalService.show(MovieUploadComponent, { class: 'modal-xl', backdrop: 'static', keyboard: true });
   }
 
 }

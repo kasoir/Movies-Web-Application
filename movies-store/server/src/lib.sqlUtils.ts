@@ -21,7 +21,6 @@ export const generateUpdateQuery = <T> ( tableName: string, defaultObject: T, up
 }
 
 export const generateInsertQuery = <T> ( tableName: string, defaultObject: T, insertObj: Partial<T>, returnRow = true, deleteId = true ) => {
-
 	const cleaned = cleanObject<T>( defaultObject, insertObj );
 	if ( deleteId && 'id' in cleaned ) delete cleaned[ 'id' ];
 	let paramCounter = 0;
@@ -79,7 +78,6 @@ export const generateBulkInsertQuery = <T> ( tableName: string, defaultObject: T
 	if ( returnRow )
 		text += 'RETURNING * ';
 
-	// console.log( text );
 	return { text, values, paramCounter };
 
 }
@@ -119,7 +117,6 @@ export const generateBulkUpsertQuery = <T> ( tableName: string, defaultObject: T
 	if ( returnRow )
 		text += 'RETURNING * ';
 
-	// console.log( text );
 
 	return { text, values, paramCounter };
 

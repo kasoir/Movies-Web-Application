@@ -57,10 +57,36 @@
                                     Movies
                                 </div>
                             </div>
-                            <textarea class="form-control col-9 border-0" placeholder="Movies" name="movies"
-                                [(ngModel)]="actor.movies" [readonly]="!isAdmin"></textarea>
+                            <!-- <textarea class="form-control col-9 border-0" placeholder="Movies" name="movies"
+                                [(ngModel)]="actor.movies" [readonly]="!isAdmin"></textarea> -->
+
+                            <p-dropdown [filter]="true" [baseZIndex]="1500" appendTo="body" class="p-dropdown"
+                                name="movies" [options]="moviesNames" placeholder="Movies" [(ngModel)]="checkedMovie"
+                                optionLabel="name" optionValue="code" autoWidth="false" [style]="{'width':'200px'}"
+                                (onChange)="selectMovie()" [readonly]="!isAdmin">
+                            </p-dropdown>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-borderless" *ngIf="actor.movies.length!=0">
+                        <tr>
+                            <th>Movie Name</th>
+                            <th *ngIf="isAdmin">Delete</th>
+                        </tr>
+                        <tr *ngFor="let movie of actor.movies; let i = index;">
+                            <td class="m-0 px-1 py-0">
+                                {{movie.name}}
+                            </td>
+                            <td class="m-0 px-1 py-0">
+                                <button class="buttonColor p-button-outlined" icon="pi pi-trash" pButton pRipple
+                                    type="button" (click)="movieDelete(i)" *ngIf="isAdmin">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

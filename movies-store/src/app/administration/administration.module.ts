@@ -35,7 +35,6 @@ const routes: Routes = [
     ActorManagementComponent,
     DirectorManagementComponent,
     CategoryManagementComponent,
-    ReportComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +45,6 @@ const routes: Routes = [
     ToastModule,
     ActorModule,
     NgxMaskModule.forRoot(),
-
   ],
   providers: [
     BsModalRef,

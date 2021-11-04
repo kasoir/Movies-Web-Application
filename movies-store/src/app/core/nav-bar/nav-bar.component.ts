@@ -11,13 +11,13 @@ export class NavBarComponent implements OnInit {
 
   public items: MenuItem[] = [];
   showBar = false;
-  showCase = this.authService?.user ? true : false;
+  public showCase = false;
   constructor(
     private authService: AuthService,
-  ) { }
-
-  ngOnInit(): void {
-    console.log(this.showCase);
+    ) { }
+    
+    ngOnInit(): void {
+    this.showCase = (this.authService?.user.uid !=='') ? true : false;
     this.items = [
       {
         label: 'Home',
@@ -31,17 +31,50 @@ export class NavBarComponent implements OnInit {
         items: [{
           label: 'Movies',
           visible: true,
-          routerLink: '/movies',
+          routerLink: '/moviesPage',
         }, {
           label: 'Actors',
           visible: true,
-          routerLink: '/actors',
+          routerLink: '/actorsPage',
+        }, {
+          label: 'Directors',
+          visible: true,
+          routerLink: '/directorsPage',
         }],
       },
       {
         label: 'Administration',
-        routerLink: '/administration',
         visible: (this.authService.user.isAdmin) ? true : false,
+        items: [
+          {
+            label: 'Administration Home',
+            visible: true,
+            routerLink: '/administration',
+          }, {
+            label: 'Users',
+            visible: true,
+            routerLink: '/administration/users',
+          }, {
+            label: 'Movies',
+            visible: true,
+            routerLink: '/administration/movies',
+          }, {
+            label: 'Actors',
+            visible: true,
+            routerLink: '/administration/actors',
+          }, {
+            label: 'Directors',
+            visible: true,
+            routerLink: '/administration/directors',
+          }, {
+            label: 'Categories',
+            visible: true,
+            routerLink: '/administration/categories',
+          }, {
+            label: 'Reports',
+            visible: true,
+            routerLink: '/administration/reports',
+          }],
       },
       {
         label: this.authService.user.name,
@@ -49,12 +82,12 @@ export class NavBarComponent implements OnInit {
         icon: 'pi pi-user nav-user',
         items: [{
           label: 'Sign In',
-          visible: true,
+          visible: !this.showCase,
           routerLink: '/signIn',
           icon: 'pi pi-power-on',
         }, {
           label: 'Sign Out',
-          visible: (this.authService.user.uid == '') ? true : false,
+          visible: this.showCase,
           command: () => this.signout(),
           icon: 'pi pi-power-off',
         }],

@@ -15,10 +15,10 @@ EXECUTE public.ensureTextFieldinTable('actor', 'birth');
 
 EXECUTE public.ensureTextFieldinTable('actor', 'movies');
 
-IF public.getFieldType('actor', 'movies') != 'json' THEN
+IF public.getFieldType('actor', 'movies') != 'ARRAY' THEN
   ALTER TABLE public."actor"
-  ALTER COLUMN "movies" TYPE JSON
-  USING "movies"::JSON;
+  ALTER COLUMN "movies" TYPE JSON []
+  USING "movies"::JSON [];
 END IF;
 
 END $$

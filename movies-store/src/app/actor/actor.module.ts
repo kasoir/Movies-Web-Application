@@ -34,6 +34,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ButtonModule,
     RippleModule,
     ToastModule,
+    DropdownModule,
     NgxMaskModule.forRoot(),
   ],
 	providers: [

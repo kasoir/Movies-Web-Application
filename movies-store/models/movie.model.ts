@@ -31,3 +31,14 @@ const defaultMovie: Movie = {
 export const getDefaultMovie = (): Movie => {
 	return objectify( defaultMovie );
 };
+export interface FileMetaData {
+	name: string,
+}
+
+export interface BaseMovFileData extends FileMetaData {
+	file: Blob,
+	apiTempPath?: string
+}
+export interface MovFile extends BaseMovFileData {
+	movie?: Movie;
+}

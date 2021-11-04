@@ -1,3 +1,11 @@
+export const getnowDate = () => {
+	const dateObject = new Date();
+	const month = dateObject.getMonth() + 1;
+	const day = dateObject.getDate();
+	const year = dateObject.getFullYear();
+	const date = year.toString() + month.toString() + day.toString()
+	return date;
+};
 export const getnow = () => {
 	const dateObject = new Date();
 	const month = dateObject.getMonth() + 1;

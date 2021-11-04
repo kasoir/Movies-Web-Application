@@ -15,6 +15,13 @@ export class ActorService {
     private http: HttpClient,
   ) { }
 
+  getBy = async ( key?: string, value?: string ): Promise<Actor[]> => {
+		const url = `${ this.ACTOR_API }${ ( !!key && !!value ) ? '/' + key + '/' + value : '' }`;
+		const result = await this.http.get<any>( url ).toPromise();
+		return <Actor[]>result.data;
+
+  }
+
   public createActor = async ( actor: Actor ) => {
 		try {
 			const url = `${ this.ACTOR_API }/createActor`;
